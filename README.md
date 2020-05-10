@@ -9,6 +9,7 @@ Checkpoint 3: https://youtu.be/htxb9YNTtCA \
 Checkpoint 4: https://youtu.be/ASTjUNcwYaQ (Part 1) and https://youtu.be/lVA6pH2bpkk (Part 2) \
 Checkpoint 5:  
 
+## Project Documentation
 Github: https://github.com/csu-hci-projects/kellyndasslerCS464 
 
 Website: https://www.cs.colostate.edu/~dasslerk/#/ 
