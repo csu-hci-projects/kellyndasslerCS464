@@ -1,0 +1,8 @@
+{
+  "name":"CS 001 Web Page Demonstration",
+  "department":"pages/department.json",
+  "pages": [
+    {"type":"page", "title":"3D Emotion GAN: Emotion-Driven GAN as an Input Method for Creating 3D Art Forms", "menu":"3D Emotion GAN", "file":"pages/home.md"},
+    {"type":"link", "title":"Code Repository", "menu":"Code Repository", "url":"https://www.github.com/csu-hci-projects/kellyndasslerCS464"}
+  ]
+}
