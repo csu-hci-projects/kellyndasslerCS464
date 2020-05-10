@@ -1,4 +1,4 @@
-# kellyndasslerCS464
+# 3D Emotion GAN: Emotion-Driven GAN as an Input Method for Creating 3D Art Forms
 
 
 Checkpoint Videos:   
