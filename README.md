@@ -1,7 +1,7 @@
 # 3D Emotion GAN: Emotion-Driven GAN as an Input Method for Creating 3D Art Forms
 
 
-Checkpoint Videos:   
+## Checkpoint Videos   
 Playlist (All Videos): https://www.youtube.com/playlist?list=PLzHQW8yep5QWqFsfz768_32kDJAcSrjOJ \
 Overview:  
 Checkpoint 2: https://youtu.be/8agGhYlDdx0 \
