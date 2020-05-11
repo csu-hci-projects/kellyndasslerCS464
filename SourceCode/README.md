@@ -13,7 +13,7 @@ Chainer 7.4.0 or later
 
 Unity3D Download for user study and object upload as described in paper available at: https://unity3d.com/get-unity/download
 
-Neural Renderer Code retrieved from: https://github.com/hiroharu-kato/neural_renderer
+Neural Renderer Code retrieved from: https://github.com/hiroharu-kato/style_transfer_3d
 
 Alternative Neural Renderer for PyTorch available at: https://github.com/daniilidis-group/neural_renderer
 
