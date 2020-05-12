@@ -1,225 +1,181 @@
+# 3D EMOTION GAN: EMOTION-DRIVEN GAN AS AN INPUT METHOD FOR CREATING 3D ART FORMS
+ by Kellyn Dassler
+
+# Abstract
+We propose a method for generating three dimensional objects from emotion-based two-dimensional image inputs via a two-step neural network process. Using an auxiliary classifier generative adversarial neural network framework with a 2D-to-3D style transfer neural network, we create novel three-dimensional objects driven by emotion-based art and user-provided emotion selection. Preliminary results show that our process generates objects that exhibit psychologically-based emotional features, and initial user studies reveal that this process may provide a new way for users to imbue personal emotions into 3D virtual objects and art.
+
 # Introduction
-Abstract: We explore emotion-driven generative adversarial networks as a user input method for creating three-dimensional art forms. 
-
-by Kellyn Dassler
-
-# Objectives
-
-1. Generate realistic 3d environments.
-2. Allow the user to have influence and control over the resulting environments.
-3. Make sure our results can be imported into professional 3d software like Unreal, Unity, or Blender.
+Art psychologically reflects its creator’s emotions \cite{AlvarezMelis2017TheEG}. Similarly, art therapy, occupational therapy, and other mental health interventions utilize creative expression to regulate and improve emotional regulation \cite{article}. However, many of these interventions are cost-prohibitive, difficult for users to pick-up quickly, and only accessible to limited populations \cite{article}. Virtual art forms provide an artistic medium that addresses the aforementioned issues, but many users still feel intimidated by the creative process \cite{article}. While several studies have proposed methods for allowing users to generate two-dimensional images that reflect human emotions using generative adversarial networks \cite{AlvarezMelis2017TheEG}, none have studied methods for generating emotionally reflective three-dimensional forms. Thus, through this study, we seek new user access points to three-dimensional art creation via co-creative design techniques with artificially intelligent neural networks.
 
 # Related Work
 
-## GauGAN
+## A. GANs
+Generative Adversarial Networks (GANs) were proposed in 2014 as a two network model to generate novel data from pre-existing data \cite{goodfellow2014generative}. They consist of at least one generator network and one discriminator network that are simultaneously trained in an adversarial fashion. For image data in particular, the generator creates increasingly improved novel data by testing generated images against the discriminator, which determines whether the generated image is ‘real’ or ‘fake’ \cite{goodfellow2014generative}.  As the discriminator is trained, its accuracy increases until the generator creates images that highly mirror the initial dataset \cite{goodfellow2014generative}. This flagship paper outlined the initial GAN framework, which has since been extended and improved upon in architectures like conditional GANs, collaborative GANs, and deep convolutional GANs  \cite{acgan}.
 
-GauGAN was the inspiration behind the semantic user map. This research demonstrated an application that took a 2 dimensional semantic image drawn by a user, and translated it into a photorealistic image. This project also used Pix2Pix as a base for their network architecture, but they also introduce a novel normalization layer called spatially-adaptive normalization. The idea is that normal layer normalization tends to wash out semantic meaning from an image. By considering the spatial properties, you can keep the semantic information in tact while still performing normalization. \cite{park2019semantic}	. Nvidia hosts an excellent demo of the project at http://nvidia-research-mingyuliu.com/gaugan.
+## B. Neural Style Transfer
+Shortly after GANs debuted, Leon and colleagues proposed a method of transferring the art style of one image to the content of another image using biologically inspired deep neural networks \cite{Gatys_2016}. By separating intermediate layer activations that represent artistic features like edges, textures, color, and shape from a convolutional image classification network, network creators can generalize these features and apply them to any other image with novel content \cite{Gatys_2016}. Although this is a neural network-based approach, it is not generative in the true sense of creating completely novel outputs. 
 
-## A Step Toward Procedural Terrain Generation with GANs
+## C. Emotion GAN
+Created by MIT Media Lab members in 2017, the Emotional GAN uses a modified conditional GAN with an extensive WikiArt and MOMA artwork dataset to generate novel images that represent human emotions \cite{AlvarezMelis2017TheEG}. They took an independent approach to dataset creation by recruiting annotators to indicate the emotion most invoked in them by the image. They achieved state-of-the-art results for emotion-based image creation, and generated novel images in six different categories—anger, anxiety, fear, joy, sadness, and neutral. Although they created artwork that exhibited emotional features reflective of relevant psychological and artistic literature, they did not study the application of this framework to user creative expression.
 
-This paper had a very similar idea to this project. They use a standard generative adversarial network to synthesize terrain heightmaps with a model trained on Earth data. They use NASA's visible earth project for their training image data at a resolution of 1km per pixel. This project appears to be quite introductory and they lay out a good overview of how a standard GAN could be implemented to generate environments. We expand on their work by introducing the conditional GAN and integrating co-creative design by including a translation from a user defined segmentation map. \cite{beckham2017step}
+## D. 3D Object Creation
+Liu, Yu, and Funkhouser showed how novice users can create interactive three-dimensional shapes through a voxel model interface connected to an iterative GAN \cite{Liu_2017}. By applying a latent vector to a 3D voxel model created by the user alongside an iterative GAN and SNAP processing pipeline, users can generate a more realistic shape from the input \cite{Liu_2017}. Their research argues that GANs can provide a process through which users with no formal art training can participate in computer-assisted interactive modeling \cite{Liu_2017}, but it does not address creative forms of expression and human-GAN co-creation. 
 
 
 # Methodology
 
-## The User Interface
+# Two-Step Neural Network Emotion Transfer Process
+ The emotion-to-three-dimensions framework was facilitated through a two-step neural network process. Initially, we trained an auxiliary classifier generative adversarial neural network (AC-GAN) using an emotion-labeled two-dimensional artwork dataset. After training, the AC-GAN was able to successfully create plausible novel artwork images reflecting major human emotions, including happiness, fear, anger, sadness, and anxiety. To use these images as novel input for creating three-dimensional objects, users were given a Jupyter notebook-based application through which they indicated their emotions and altered the generated photos before sending the photos to a 2D-to-3D neural transfer style network. In a preliminary user preference study, the participants were trained in both manual three-dimensional object creation using a polybrush in Unity3D as shown in Figure 1, and the two-step neural network object creation process as shown in Figure 2. After creating objects for each major emotion through both approaches, the users’ indicated their preferred creation method and produced outputs for each emotion. Finally, we interviewed each user to gather qualitative preference data to provide insight into user preferences. 
+ 
+ INSERT FIGURE 1 & 2
+ 
+# Dataset Summary
+The generated style images are rooted in an emotion-labeled artwork dataset processed from the original WikiArt artwork database and annotated with human emotions garnered from ten or more annotators, available from the WikiArt Emotions Dataset webpage \cite{LREC18-ArtEmo}. Each image was accompanied by floating point values that indicated the value of 20 different emotions present in the image. In total, 2865 annotated images were downloaded using support from the pandas Python package. To retrieve the major emotion most expressed by each image, we eliminated emotions that did not match one of five emotion categories-- happiness, fear, anger, sadness, and anxiety—and then processed the dataset to find the maximum value amongst the remaining emotion categories. These emotions were chosen due to their straightforward nature and consistency among users and high levels of representation within the dataset. Each image was then loaded into an image array and resized to 28x28 pixels, while each corresponding emotion label was processed into a label list to prepare the data for network training.
 
-The user interface is a web based javascript application that allows a user to paint a semantically significant image using predefined brushes. We include tools to change the brush size and export or clear the image. The canvas size is 512 x 512 pixels, and these images are resized automatically when passed to our neural network.
+The content object files were created via object files using XCode with additional provided object files from the neural renderer repository. While we included objects other than spheres for future work, we only utilized the sphere object to run the study, in order to account for constraints and confounding variables. These were imported into the data examples directory for use by the transfer style neural network.
 
-![UI](images/ui-app.png)
+# ACGAN Structure
+GANs are an artificially intelligent architecture for creating novel data from existing inputs \cite{goodfellow2014generative}. Conditional GANs, a deep convolutional subset of traditional GANs used for creating images, use class-labeled image input to create images of one or more chosen types \cite{10.5555/3305890.3305954}. The AC-GAN extends the generative process of the conditional GAN by adding a class label prediction into the discriminator network, which allows the network to create novel images and determine which class they fit into best \cite{10.5555/3305890.3305954}. This alteration stabilizes network training to produce higher quality image representations in the latent space \cite{acgan}. This structure is well-suited to our proposed method because it allows each generated output to be novel exhibit learned attributes indicative of a given emotion class. For more in-depth ACGAN information please see the associated report in Github.
 
-The backend is powered by a Flask API. We set up an endpoint to be able to evaluate a drawn image on our trained models. In order to pass the usermap and generated heightmap back and forth between the client and the server, we use base 64 encoding and decoding on the image. This way we can save the images to the file system and have a local process run the neural network and return the generated heightmap. This direct access to the file system has security concerns, so it's only recommended to run the app locally.
+INSERT FIGURE 3
 
-## The Dataset
+# Neural Transfer 2D-to-3D Mesh Renderer
+In contrast to traditional GANs, neural style transfer networks apply the features of a single image input to an unrelated output, rather than generating entirely novel data \cite{neuraltrans}. In the original style transfer algorithm, a style image is applied to a content image using a pretrained VGG19 network architecture for image classification, deconstructed into layers that are used to define the image contents and styles \cite{neuraltrans}. For our proposed method, we used a pre-trained 2D-to-3D mesh renderer network for image style transfer \cite{DBLP:journals/corr/abs-1711-07566}to three-dimensional objects called Neural Renderer \cite{DBLP:journals/corr/abs-1711-07566}. To convert an image into a polygon object mesh, the network utilizes an approximate gradient approach for rasterization to enable a rendering component in the network. Thus, the network can circumvent the usual prevention of backpropagation by rasterization and create three-dimensional mesh reconstructions that reflect the shape, color, and texture of the two-dimensional input image. According to the flagship neural renderer paper, this mesh reconstruction process outperforms existing voxel-based approaches \cite{DBLP:journals/corr/abs-1711-07566}.
 
-We use an interactive open source map tool that visualizes elevation data gathered from Mapzen's global elevation service \cite{richardson2016mapzen}. The data for the map tool is aggregated from 3 sources, USGS, NASA, and NGA. The map is a greyscale map, where the brightness of the pixel corresponds to the relative elevation.
+# Network Training
+We trained our AC-GAN model with Google CoLab’s TPU hardware, written in Python on a TensorFlow core using eighty percent of the class-labeled image data for a total of 2292 images. Each input image was pre-processed to 28x28 pixel images and the model generated novel image outputs for each emotion class— happiness, fear, anger, sadness, and anxiety. Following training, the images were validated and tested using the remaining twenty percent of image data. Generated images were analyzed for psychologically-based emotional feature representation, as described in the Emotion GAN paper \cite{AlvarezMelis2017TheEG}, and then displayed and stored for later use. 
 
-![Heightmapper](images/heightmapper.png)
-	
-We then built a program that controls a headless browser using an open source library developed by Google called Puppeteer. This script loads a random coordinate, checks if the coordinate is over land and if so, then we save an image of the elevation data at that coordinate. We resize the saved image to be 512 x 512 pixels.
-	
-We then manually build the usermap training set using our user interface application. For each image in the heightmap training set, we paint a usermap to represent that heightmap, using the semantically significant brushes that most closely match the terrain (mountains, hills, plains, rivers, and terraces). This process is a subjective one and all usermaps were painted by myself. This does bias the model to produce images according to how I read the heightmaps.
+For the next part of the study, a pre-trained 2D-to-3D neural renderer \cite{DBLP:journals/corr/abs-1711-07566} was used to convert the generated two-dimensional images into three-dimensional object meshes. This adapted code was built in Python and TensorFlow and used an approximate gradient for rasterization operations to prevent back-propagation \cite{DBLP:journals/corr/abs-1711-07566}. This network was run for each selected emotion during the user study using user-selected generated image data from the AC-GAN network as the style and a sphere object as the content. Each stylized object reflected the shape, color, and texture of the user-selected generated image. 
 
-After this process we are left with 258 paired usermaps and heightmaps. We group all of these together into a batch to be trained on.
+For more in-depth training information please see the associated report on Github.
 
-Creating the usermaps by hand is quite time consuming, and I wanted to experiment with models trained on a large dataset. We accomplish this by augmenting our first batch with simple transformations in order to artificially increase the number of images we can train on. Image augmentations are a well researched and effective appoach to improving neural network performance \cite{perez2017effectiveness}.
-	
-We performed 5 operations on each usermap and heightmap. We mirror horizontally, flip vertically, rotate 90 derees, rotate 180 degrees, and rotate 270 degrees.	All of the resulting images are gathered into a second batch and we end up with 1548 paired images (a 5x increase).
-	
-Before training the networks, we need to perform one more preprocessing step. Pix2Pix requires paired images to be combined into a single side by side image. We stack each pair of usermap and heightmap and save these images into separate batches spcifically for Pix2Pix. Each resulting image is 1024 x 512 pixels. CycleGAN does not need this preprocessing step and can be trained on images in different directories.
+# User Preference Study
+To test our proposed creative method, we conducted a user preference study among six participants. The study was comprised of two creation input conditions: a Unity3D polybrush virtual object creation process (hereafter referred to as the polybrush process) and our three-dimensional emotion GAN virtual object creation process (hereafter referred to as the emotion GAN process). Each participant created objects through both processes for each of the five emotions---- happiness, fear, anger, sadness, and anxiety. The process creation order was randomized for each user. To reduce confounding variables, none of the selected participants had previous experience with Unity3D or artificial intelligence co-creation techniques. Additionally, each participant was given an initial questionnaire that asked about their comfort levels with art creation, how strongly they felt their emotions, and whether or not they tend to express their emotions through creative outlets such as art, music, or writing.
 
+For the polybrush process, the participants were trained in polybrush and Unity techniques, and the polybrush tool was set to utilize open edges and a sticky brush technique among all users. They were allowed to alter shape, texture, color, and smoothing of their given structure. After practicing polybrush maneuvers, the users were given a sphere-shaped virtual object in the Unity platform and were asked to produce a three-dimensional object that reflected their understanding of one of the five selected major human emotions. The order of each emotion was randomized for each participant. The participant was then given 10 minutes to create and finish their virtual sculpture. This was repeated for each of the five emotions, and each virtual object was stored to an object file for later review.
 
-## Training the Models
+For the emotion GAN process, each participant was provided with a user-friendly Jupyter notebook that featured drop-down widgets to make emotion and image selections. They were each given a brief overview of the idea that computers can create novel image data, the two-step process for generating a novel object, and were trained in using the buttons and widgets in the Jupyter notebook. During the process, users were asked to click a button that reflected images from one of the five major emotions. Then, they were provided with at least five photos generated by the pre-trained emotion images network previously described. The participants were then asked to select one of the five photos as the “most representative” of the given emotion. This selected image was then applied to a virtual sphere object using the neural renderer and downloaded as an object file. As in the polybrush process, the users were asked to produce a virtual object for each emotion in a randomized fashion through this method, and each object file was saved for later review.  
 
-We trained a total of 4 models. Pix2Pix and CycleGAN on both the original and augmented batch of training data. The training was performed on my desktop GPU enabled PC. The operating system is Ubuntu 18.04. We train on a Nvidia GTX 1080ti GPU with 11 GB of memory, an Intel i7 8700k processor, a 500GB solid state hard drive, and 32 GB of RAM.
-	
-Both models are built on top of the PyTorch framework \cite{paszke2019pytorch} and are trained for 200 epochs. We use the default hyperparameters of 0.0002 for the learning rate and ADAM for the optimizer. We use the open source repo implemented by Jun-Yan Zhu, who published the research on both models \cite{junyanzhu2017github}. Both models are 15 layers deep and contain multiple convolutional layers and residual blocks \cite{isola2016imagetoimage} \cite{zhu2017unpaired}.
-	
-## Pix2Pix
-
-Our pix2pix model contains a total of 57.183 million parameters. The generator network contains 54.414 million parameters and the discriminator contains 2.769 million parameters. The original batch of data took approximately 45 minutes to train. The augmented batch took approximately 4 hours to train.
-	
-## CycleGAN
-
-Our cyclegan model contained a total of 28.286 million parameters. Generator A and Generator B each contain 11.378 million parameters. Discriminator A and Discriminator B each contain 2.765 million parameters. The original batch of data took approximately 4 hours to train. The augmented batch took approximately 24 hours to train.
-
+After both processes were completed, each participant was shown their virtual objects created through the polybrush process and the emotion GAN process side-by-side for each emotion. The participant was asked to rate their virtual object preference for each emotion, and for all the emotions overall. Then, they were asked which input process they preferred. The results were recorded and analyzed.
 
 # Results
+After each of the six user rounds were completed, the results were compiled and analyzed. An example of a polybrush generated sculpture versus an emotion GAN generated sculpture for "angry" can be seen in Figure 4. Overall, 4 out of 6 participants, or sixty-seven percent, preferred the polybrush created objects over the emotion GAN created objects. However, for certain emotions, including anxiety and fear, all but one participant preferred the emotion GAN created objects. Summaries of these results can be seen in Figure 5. Interestingly, despite preferring the polybrush created objects over the emotion GAN created objects overall, all but one participant also preferred the emotion GAN process to the polybrush process. 
 
-Subjective results of networks show that Pix2Pix performs much better than CycleGAN. For the specfic task of segmented image translation, paired training data allows the network to learn the meaning of the segmentations much better. Cyclegan had issues of keeping the semantic meaning in tact. Even though it does appear to generate some of the patterns correctly, it's often mapped to the wrong brush or user defined section.
+Insert figures 4 and 5
 
-Both models trained on the augmented batch produce higher fidelity images. Both Pix2Pix models produce usable and realistic terrain.
+# Discussion
+Due to study restraints resulting from COVID-19 restrictions, we could only run the study with six participants. Thus, we were unable to provide statistically valid quantitative analysis for the study with \emph N = 6. However, to better understand the results, we conducted participant post-study surveys to garner reasoning and starting points for future studies. 
 
-We also find that the model does not perform very well on usermaps with rivers. We found that rivers tend to produce noisy results and sometimes the rivers aren't defined enough to be noticeable in the results. I think this can be solved with more training data including rivers. Due to the nature of how the training data was gathered, it's likely that we didn't get enough examples, and due to the subjective nature of myself reading the earth data and drawing the usermaps myself, I could have read them wrong and not painted them as detailed as they needed to be.
+Many of the participants indicated that they preferred the polybrush created objects to the emotion GAN created ones, because they felt as if they had more control over the outcome. As one user said, “I like to make small adjustments and add lots of different colors, rather than just having the computer decide for me.” When asked about their simultaneous preference for the emotion GAN creation process, however, most participants said that it was simpler to use than the polybrush tool, and they liked the new possibilities that the GAN might create. One user also suggested that for more complex emotions like anxiety and fear, the emotion GAN also helped her “come up with a starting point” and the artistic renditions “did a better job of expressing [these] complex emotions, since [she] didn’t really know how to express that”. This user also indicated in her pre-survey that she did not usually express her emotions strongly, nor did she usually express them through creative practices.
 
-Terraces also had a lack of training data. Due to the specificity of their appearance, they were able to produce better results than rivers. The models will likely struggle on terraces with odd shapes.
-
-Mountains, hills, and plains all performed very well. There was plenty of samples in the training for these features and the areas for each tend to be large. This allowed the networks to do a great job of modeling these terrain features.
-
-## User Preference Survey
-	
-We also created a small user survey to measure user preference between the 4 trained models. The survey was conducted through google forms and sent to the students in CSCI 567 (3D User Interfaces) through the piazza message board. I took a sample of 5 user maps, and for each one, I produced the ouput for each model and listed those as multiple choice answers.
-
-We recieved 11 responses. For all 5 samples, users preferred the output of Pix2Pix over the output of CycleGAN. When looking at the results of the original training batch to the augmented training batch, users preferred the ouput of the original batch for 4 samples and the augmented batch for one of the samples.
-
-![Survey](images/survey.png)
-
-Below are some sample usermaps, generated heightmaps and 3d renderings.
-
-![Viz1](images/viz-1.png)
-![Viz2](images/viz-2.png)
-![Viz3](images/viz-3.png)
-
+These seemingly conflicting opinions offer some insight into the artificial intelligence co-creation process. Perhaps users would prefer more options for adjusting the final outcome of the generated image via easy-to-use interactive shaping tools or widgets, while still using the emotion GAN generated image as a starting point for creation. Similarly, offering choices for different object shapes in the emotion GAN process may provide a way for more user control in shaping the final object outcome. These may provide a basis for future studies on improving this process, but the results still suggest that our proposed generative method may provide a more accessible gateway to three-dimensional emotion-based art for many users. 
 
 # Conclusion
-
-We saw that we can generate good results with generative adversarial networks. It's easy to generate these environments faster and more efficiently than traditional methods.
-
-Using heightmaps as a target allows for the resulting environments to be generalizable. We can import the heightmaps into many popular 3d software applications like Unity, Unreal and Blender.
-
-The training time is computationally intensive, but inference is quick. Once a model is trained, it's easy to generate as many new environments as you want. This has massive improvements over hand crafted environments.
-
-Pix2Pix performs much better than CycleGAN and users prefer its output for this task over CycleGAN for every sample. Pix2Pix offers specificty that CycleGAN can not match.
-
-This is a viable area of research, and there's opportunities to tune these models further to get better results. Training data is the most important part of this project, and spending more time with it will lead to better results. We also show that augmenting the training data is an easy way to expand a dataset, but it can lead to overfitting. There is a middleground between too much and too little for augmentation.
+In this study, we have proposed a novel two-step method for generating emotion-based three-dimensional artwork from two-dimensional images and user input. Although we did not achieve state-of-the-art results, and most users preferred more control over the final representation of their generated objects, we did provide a preferred gateway for users to engage in co-creative design with artificially intelligent networks. By improving upon this process via more user input inclusion, better image generation, and three-dimensional object options, future researchers can iterate upon a viable co-creative design process for generating emotion-based three-dimensional virtual objects for creative expression and therapeutic purposes.
 
 # Future Work
+In future studies, we suggest several alterations for improving and testing our proposed generative method. During the study, we only had access to a limited dataset, which resulted in less than state-of-the-art image generations from the ACGAN. As with most generative networks, the emotion based ACGAN will likely exhibit improved results if trained with larger amounts of more robust data. While we only tested five emotions separately, the neural network can easily be adjusted to generate images that represent several different emotions, or layers of emotions. For example, future research may want to test user preferences for creating objects that reflect both anger and sadness, or more complex emotions like confusion, regret, or shame. Additionally, we recommend that future researchers generate more “adjustment widgets” and object types to test user preferences for control and input during the emotion GAN process. Finally, we propose using facial recognition networks to test using facial emotions as an input method for the generative emotion GAN process, rather than user button selected emotions. While this was initially a proposed method for the study, we could not complete it due to time and situation constraints. However, we think this is a valuable avenue for generating novel input methods for the virtual creative process. These changes will generate new understandings about the human-artificial intelligence co-creative process.
 
-Expanding this idea to include texture maps could be an interesting direction to go. Using this same method, it should be possible to translate a given heightmap into a texturemap. This could allow the designer to have control over generated styles like barren desert scenes vs dark horror scenes vs fantastical colorful scenes. Gathering training data of texturemaps would likely be the bottleneck.
-
-Modifying the network to perform real time generation would be an interesting addition. This would give the user a more interactive experience in designing the enviroments. Current latency with this implementation is not fast enough so new network architectures or approaches would be needed.
-
-Tunable paramaters would also be an interesting addition. Giving the user even more control over the results would lead to a better experience. I can imagine parameters like intensity, noise, smoothness could rusult in a lot of usable outcomes.
-
-Expanding the training set with different means. Needing to draw all the usermaps for the training set is time consuming and error/bias prone. Coming up with a programmatic way to create the usermap training set could have a large impact on the quality of the results.
-
-
-# Demo Video
-
-Here's a quick example of how a user might use the app.
-
-[![Demo](image_link_here)](video_link_here)
-
+# Acknowledgements
+Special thanks to Francisco for being a very intelligent, encouraging professor and research mentor!
 
 # References
-
-@misc{summerville2017procedural,
-  title={Procedural Content Generation via Machine Learning (PCGML)},
-  author={Adam Summerville and Sam Snodgrass and Matthew Guzdial and Christoffer Holmgård and Amy K. Hoover and Aaron Isaksen and Andy Nealen and Julian Togelius},
-  year={2017},
-  eprint={1702.00539},
-  archivePrefix={arXiv},
-  primaryClass={cs.AI}
+@inproceedings{AlvarezMelis2017TheEG,
+  title={The Emotional GAN : Priming Adversarial Generation of Art with Emotion},
+  author={David Alvarez-Melis},
+  year={2017}
 }
-
-@misc{radford2015unsupervised,
-  title={Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks},
-  author={Alec Radford and Luke Metz and Soumith Chintala},
-  year={2015},
-  eprint={1511.06434},
-  archivePrefix={arXiv},
-  primaryClass={cs.LG}
+@article{article,
+author = {Brinck, Ingar and Reddy, Vasudevi},
+year = {2019},
+month = {07},
+pages = {},
+title = {Dialogue in the making: emotional engagement with materials},
+journal = {Phenomenology and the Cognitive Sciences},
+doi = {10.1007/s11097-019-09629-2}
 }
-
-@misc{richardson2016mapzen,
-  author = {Peter Richardson},
-  title = {Tangrams Heightmapper},
-  year = 2016,
-  publisher = {Mapzen},
-  url = {https://github.com/tangrams/heightmapper}
+@online{acgan,
+  author = {Brownlee, Jason},
+  title = {How to Develop an Auxiliary Classifier GAN (AC-GAN) From Scratch with Keras},
+  year = 2020,
+  url = {https://machinelearningmastery.com/how-to-develop-an-auxiliary-classifier-gan-ac-gan-from-scratch-with-keras/},
+  urldate = {2020-03-23}
 }
-
-@misc{junyanzhu2017github,
-  author = {Jun-Yan Zhu},
-  title = {Pytorch Pix2Pix and CycleGAN},
-  year = 2017,
-  url = {https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix}
+@article{Gatys_2016,
+   title={A Neural Algorithm of Artistic Style},
+   volume={16},
+   ISSN={1534-7362},
+   url={http://dx.doi.org/10.1167/16.12.326},
+   DOI={10.1167/16.12.326},
+   number={12},
+   journal={Journal of Vision},
+   publisher={Association for Research in Vision and Ophthalmology (ARVO)},
+   author={Gatys, Leon and Ecker, Alexander and Bethge, Matthias},
+   year={2016},
+   month={Sep},
+   pages={326}
 }
-@misc{starscenesoftware2006,
-  author = {Star Scene Software},
-  title = {Fractscape},
-  year = 2006,
-  url = {https://starscenesoftware.com/fractscape.html}
+@misc{goodfellow2014generative,
+    title={Generative Adversarial Networks},
+    author={Ian J. Goodfellow and Jean Pouget-Abadie and Mehdi Mirza and Bing Xu and David Warde-Farley and Sherjil Ozair and Aaron Courville and Yoshua Bengio},
+    year={2014},
+    eprint={1406.2661},
+    archivePrefix={arXiv},
+    primaryClass={stat.ML}
 }
-
-@misc{perez2017effectiveness,
-  title={The Effectiveness of Data Augmentation in Image Classification using Deep Learning},
-  author={Luis Perez and Jason Wang},
-  year={2017},
-  eprint={1712.04621},
-  archivePrefix={arXiv},
-  primaryClass={cs.CV}
+@article{DBLP:journals/corr/abs-1711-07566,
+  author    = {Hiroharu Kato and
+               Yoshitaka Ushiku and
+               Tatsuya Harada},
+  title     = {Neural 3D Mesh Renderer},
+  journal   = {CoRR},
+  volume    = {abs/1711.07566},
+  year      = {2017},
+  url       = {http://arxiv.org/abs/1711.07566},
+  archivePrefix = {arXiv},
+  eprint    = {1711.07566},
+  timestamp = {Mon, 13 Aug 2018 16:48:37 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-1711-07566.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
 }
-
-@misc{isola2016imagetoimage,
-  title={Image-to-Image Translation with Conditional Adversarial Networks},
-  author={Phillip Isola and Jun-Yan Zhu and Tinghui Zhou and Alexei A. Efros},
-  year={2016},
-  eprint={1611.07004},
-  archivePrefix={arXiv},
-  primaryClass={cs.CV}
+@online{neuraltrans,
+  title = {How to Develop an Auxiliary Classifier GAN (AC-GAN) From Scratch with Keras},
+  year = 2020,
+  url = {https://www.tensorflow.org/tutorials/generative/style_transfer},
+  urldate = {2020-03-23}
 }
-
-@misc{zhu2017unpaired,
-  title={Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks},
-  author={Jun-Yan Zhu and Taesung Park and Phillip Isola and Alexei A. Efros},
-  year={2017},
-  eprint={1703.10593},
-  archivePrefix={arXiv},
-  primaryClass={cs.CV}
+@article{Liu_2017,
+   title={Interactive 3D Modeling with a Generative Adversarial Network},
+   ISBN={9781538626108},
+   url={http://dx.doi.org/10.1109/3DV.2017.00024},
+   DOI={10.1109/3dv.2017.00024},
+   journal={2017 International Conference on 3D Vision (3DV)},
+   publisher={IEEE},
+   author={Liu, Jerry and Yu, Fisher and Funkhouser, Thomas},
+   year={2017},
+   month={Oct}
 }
-
-@misc{paszke2019pytorch,
-  title={PyTorch: An Imperative Style, High-Performance Deep Learning Library},
-  author={Adam Paszke and Sam Gross and Francisco Massa and Adam Lerer and James Bradbury and Gregory Chanan and Trevor Killeen and Zeming Lin and Natalia Gimelshein and Luca Antiga and Alban Desmaison and Andreas Köpf and Edward Yang and Zach DeVito and Martin Raison and Alykhan Tejani and Sasank Chilamkurthy and Benoit Steiner and Lu Fang and Junjie Bai and Soumith Chintala},
-  year={2019},
-  eprint={1912.01703},
-  archivePrefix={arXiv},
-  primaryClass={cs.LG}
+@inproceedings{LREC18-ArtEmo,
+    author = {Mohammad, Saif M. and Kiritchenko, Svetlana},
+    title = {An Annotated Dataset of Emotions Evoked by Art},
+    booktitle = {Proceedings of the 11th Edition of the Language Resources and Evaluation Conference (LREC-2018)},
+    year = {2018},
+    address={Miyazaki, Japan}
 }
-
-@misc{park2019semantic,
-  title={Semantic Image Synthesis with Spatially-Adaptive Normalization},
-  author={Taesung Park and Ming-Yu Liu and Ting-Chun Wang and Jun-Yan Zhu},
-  year={2019},
-  eprint={1903.07291},
-  archivePrefix={arXiv},
-  primaryClass={cs.CV}
+@inproceedings{10.5555/3305890.3305954,
+author = {Odena, Augustus and Olah, Christopher and Shlens, Jonathon},
+title = {Conditional Image Synthesis with Auxiliary Classifier GANs},
+year = {2017},
+publisher = {JMLR.org},
+booktitle = {Proceedings of the 34th International Conference on Machine Learning - Volume 70},
+pages = {2642–2651},
+numpages = {10},
+location = {Sydney, NSW, Australia},
+series = {ICML’17}
 }
-
-@misc{beckham2017step,
-  title={A step towards procedural terrain generation with GANs},
-  author={Christopher Beckham and Christopher Pal},
-  year={2017},
-  eprint={1707.03383},
-  archivePrefix={arXiv},
-  primaryClass={stat.ML}
-}
-
-@misc{ wiki:procedural,
-  author = "{Wikipedia contributors}",
-  title = "Procedural generation --- {Wikipedia}{,} The Free Encyclopedia",
-  year = "2019",
-  url = "https://en.wikipedia.org/w/index.php?title=Procedural_generation&oldid=928346717",
-  note = "[Online; accessed 9-December-2019]"
+@online{polybrush,
+  title = {Polybrush Introduction and Tutorial},
+  year = 2020,
+  url = {https://unity3d.com/unity/features/worldbuilding/polybrush},
+  urldate = {2020-03-23}
 }
