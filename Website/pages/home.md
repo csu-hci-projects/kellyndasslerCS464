@@ -86,6 +86,9 @@ In future studies, we suggest several alterations for improving and testing our 
 # Acknowledgements
 Special thanks to Francisco for being a very intelligent, encouraging professor and research mentor!
 
+# Video
+For an overview of the project, an in-depth summary, and incremental checkpoints, please go to https://www.youtube.com/playlist?list=PLzHQW8yep5QWqFsfz768_32kDJAcSrjOJ
+
 # References
 @inproceedings{AlvarezMelis2017TheEG,
   title={The Emotional GAN : Priming Adversarial Generation of Art with Emotion},
