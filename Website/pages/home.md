@@ -27,8 +27,8 @@ Liu, Yu, and Funkhouser showed how novice users can create interactive three-dim
 # Two-Step Neural Network Emotion Transfer Process
  The emotion-to-three-dimensions framework was facilitated through a two-step neural network process. Initially, we trained an auxiliary classifier generative adversarial neural network (AC-GAN) using an emotion-labeled two-dimensional artwork dataset. After training, the AC-GAN was able to successfully create plausible novel artwork images reflecting major human emotions, including happiness, fear, anger, sadness, and anxiety. To use these images as novel input for creating three-dimensional objects, users were given a Jupyter notebook-based application through which they indicated their emotions and altered the generated photos before sending the photos to a 2D-to-3D neural transfer style network. In a preliminary user preference study, the participants were trained in both manual three-dimensional object creation using a polybrush in Unity3D as shown in Figure 1, and the two-step neural network object creation process as shown in Figure 2. After creating objects for each major emotion through both approaches, the users’ indicated their preferred creation method and produced outputs for each emotion. Finally, we interviewed each user to gather qualitative preference data to provide insight into user preferences. 
  
-![Fig 1](images/polybrushstart.png?raw=true "polybrushstart.png")
-![Fig 2](images/selection.jpg?raw=true "selection.jpg")
+![Fig 1](figures/images/polybrushstart.png?raw=true "polybrushstart.png")
+![Fig 2](figures/images/selection.jpg?raw=true "selection.jpg")
  
 # Dataset Summary
 The generated style images are rooted in an emotion-labeled artwork dataset processed from the original WikiArt artwork database and annotated with human emotions garnered from ten or more annotators, available from the WikiArt Emotions Dataset webpage \cite{LREC18-ArtEmo}. Each image was accompanied by floating point values that indicated the value of 20 different emotions present in the image. In total, 2865 annotated images were downloaded using support from the pandas Python package. To retrieve the major emotion most expressed by each image, we eliminated emotions that did not match one of five emotion categories-- happiness, fear, anger, sadness, and anxiety—and then processed the dataset to find the maximum value amongst the remaining emotion categories. These emotions were chosen due to their straightforward nature and consistency among users and high levels of representation within the dataset. Each image was then loaded into an image array and resized to 28x28 pixels, while each corresponding emotion label was processed into a label list to prepare the data for network training.
@@ -38,7 +38,7 @@ The content object files were created via object files using XCode with addition
 # ACGAN Structure
 GANs are an artificially intelligent architecture for creating novel data from existing inputs \cite{goodfellow2014generative}. Conditional GANs, a deep convolutional subset of traditional GANs used for creating images, use class-labeled image input to create images of one or more chosen types \cite{10.5555/3305890.3305954}. The AC-GAN extends the generative process of the conditional GAN by adding a class label prediction into the discriminator network, which allows the network to create novel images and determine which class they fit into best \cite{10.5555/3305890.3305954}. This alteration stabilizes network training to produce higher quality image representations in the latent space \cite{acgan}. This structure is well-suited to our proposed method because it allows each generated output to be novel exhibit learned attributes indicative of a given emotion class. For more in-depth ACGAN information please see the associated report in Github.
 
-![Fig 3](images/ACGAN.png?raw=true "ACGAN.png")
+![Fig 3](figures/images/ACGAN.png?raw=true "ACGAN.png")
 
 # Neural Transfer 2D-to-3D Mesh Renderer
 In contrast to traditional GANs, neural style transfer networks apply the features of a single image input to an unrelated output, rather than generating entirely novel data \cite{neuraltrans}. In the original style transfer algorithm, a style image is applied to a content image using a pretrained VGG19 network architecture for image classification, deconstructed into layers that are used to define the image contents and styles \cite{neuraltrans}. For our proposed method, we used a pre-trained 2D-to-3D mesh renderer network for image style transfer \cite{DBLP:journals/corr/abs-1711-07566}to three-dimensional objects called Neural Renderer \cite{DBLP:journals/corr/abs-1711-07566}. To convert an image into a polygon object mesh, the network utilizes an approximate gradient approach for rasterization to enable a rendering component in the network. Thus, the network can circumvent the usual prevention of backpropagation by rasterization and create three-dimensional mesh reconstructions that reflect the shape, color, and texture of the two-dimensional input image. According to the flagship neural renderer paper, this mesh reconstruction process outperforms existing voxel-based approaches \cite{DBLP:journals/corr/abs-1711-07566}.
@@ -62,9 +62,13 @@ After both processes were completed, each participant was shown their virtual ob
 # Results
 After each of the six user rounds were completed, the results were compiled and analyzed. An example of a polybrush generated sculpture versus an emotion GAN generated sculpture for "angry" can be seen in Figure 4. Overall, 4 out of 6 participants, or sixty-seven percent, preferred the polybrush created objects over the emotion GAN created objects. However, for certain emotions, including anxiety and fear, all but one participant preferred the emotion GAN created objects. Summaries of these results can be seen in Figure 5. Interestingly, despite preferring the polybrush created objects over the emotion GAN created objects overall, all but one participant also preferred the emotion GAN process to the polybrush process. 
 
-![Fig 4](images/emotiongraph.png?raw=true "emotiongraph.png")
+![Fig 4.1](figures/images/angryobject.png?raw=true "angryobject.png")
 
-![Fig 5](images/overallgraph.png?raw=true "overallgraph.png")
+![Fig 4.2](figures/images/angryGAN.png?raw=true "angryGAN.png")
+
+![Fig 5.1](figures/images/emotiongraph.png?raw=true "emotiongraph.png")
+
+![Fig 5](figures/images/overallgraph.png?raw=true "overallgraph.png")
 
 # Discussion
 Due to study restraints resulting from COVID-19 restrictions, we could only run the study with six participants. Thus, we were unable to provide statistically valid quantitative analysis for the study with \emph N = 6. However, to better understand the results, we conducted participant post-study surveys to garner reasoning and starting points for future studies. 
