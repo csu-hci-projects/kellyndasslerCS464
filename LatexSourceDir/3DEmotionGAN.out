@@ -1,0 +1,19 @@
+\BOOKMARK [1][-]{section.4}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.6}{Related Work}{}% 2
+\BOOKMARK [2][-]{subsection.8}{GANs}{section.6}% 3
+\BOOKMARK [2][-]{subsection.10}{Neural Style Transfer}{section.6}% 4
+\BOOKMARK [2][-]{subsection.12}{Emotional GAN}{section.6}% 5
+\BOOKMARK [2][-]{subsection.14}{3D Object Generation}{section.6}% 6
+\BOOKMARK [1][-]{section.16}{Methodology}{}% 7
+\BOOKMARK [2][-]{subsection.18}{Method of Emotion Transfer via Two-Step Process}{section.16}% 8
+\BOOKMARK [2][-]{subsection.21}{Dataset Characterization}{section.16}% 9
+\BOOKMARK [2][-]{subsection.23}{AC-GAN}{section.16}% 10
+\BOOKMARK [2][-]{subsection.26}{Neural Transfer 2D-to-3D Mesh Renderer}{section.16}% 11
+\BOOKMARK [2][-]{subsection.28}{Network Training Process}{section.16}% 12
+\BOOKMARK [2][-]{subsection.30}{User Preference Study}{section.16}% 13
+\BOOKMARK [1][-]{section.32}{Results}{}% 14
+\BOOKMARK [1][-]{section.36}{Discussion}{}% 15
+\BOOKMARK [1][-]{section.38}{Conclusion}{}% 16
+\BOOKMARK [1][-]{section.40}{Future Work}{}% 17
+\BOOKMARK [1][-]{section.42}{Acknowledgements}{}% 18
+\BOOKMARK [1][-]{section.44}{References }{}% 19

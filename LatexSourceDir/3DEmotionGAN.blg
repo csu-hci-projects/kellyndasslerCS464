@@ -1,0 +1,78 @@
+This is BibTeX, Version 0.99d (TeX Live 2020)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: 3DEmotionGAN.aux
+The style file: SIGCHI-Reference-Format.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: sample.bib
+Warning--entry type for "acgan" isn't style-file defined
+--line 15 of file sample.bib
+Warning--entry type for "neuraltrans" isn't style-file defined
+--line 59 of file sample.bib
+Warning--entry type for "polybrush" isn't style-file defined
+--line 94 of file sample.bib
+Warning--no key, author in neuraltrans
+Warning--no author, editor, organization, or key in neuraltrans
+Warning--to sort, need author or key in neuraltrans
+Warning--no key, author in polybrush
+Warning--no author, editor, organization, or key in polybrush
+Warning--to sort, need author or key in polybrush
+Warning--no key, author in neuraltrans
+Warning--no key, author in neuraltrans
+Warning--no key, author in polybrush
+Warning--no key, author in polybrush
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--empty booktitle in AlvarezMelis2017TheEG
+Warning--empty publisher in AlvarezMelis2017TheEG
+Warning--empty address in AlvarezMelis2017TheEG
+Warning--page numbers missing in both pages and numpages fields in AlvarezMelis2017TheEG
+Warning--no number and no volume in article
+Warning--page numbers missing in both pages and numpages fields in DBLP:journals/corr/abs-1711-07566
+Warning--no number and no volume in Liu_2017
+Warning--page numbers missing in both pages and numpages fields in Liu_2017
+Warning--empty publisher in LREC18-ArtEmo
+Warning--page numbers missing in both pages and numpages fields in LREC18-ArtEmo
+Warning--empty address in 10.5555/3305890.3305954
+Warning--require articleno with numpages field in 10.5555/3305890.3305954
+You've used 11 entries,
+            5283 wiz_defined-function locations,
+            1288 strings with 16156 characters,
+and the built_in function-call counts, 11312 in all, are:
+= -- 1505
+> -- 276
+< -- 0
++ -- 90
+- -- 332
+* -- 765
+:= -- 1098
+add.period$ -- 52
+call.type$ -- 11
+change.case$ -- 70
+chr.to.int$ -- 11
+cite$ -- 39
+duplicate$ -- 729
+empty$ -- 523
+format.name$ -- 117
+if$ -- 2520
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 31
+newline$ -- 124
+num.names$ -- 54
+pop$ -- 358
+preamble$ -- 1
+purify$ -- 114
+quote$ -- 0
+skip$ -- 181
+stack$ -- 0
+substring$ -- 1434
+swap$ -- 50
+text.length$ -- 476
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 99
+warning$ -- 22
+while$ -- 45
+width$ -- 0
+write$ -- 184
+(There were 25 warnings)

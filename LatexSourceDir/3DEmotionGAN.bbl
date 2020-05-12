@@ -1,0 +1,136 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{00}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{{\tt DOI:}\penalty0{#1}\ }
+  \fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       #1{#1}          \fi
+
+\bibitem{neuraltrans}
+ 2020.
+\newblock How to Develop an Auxiliary Classifier GAN (AC-GAN) From Scratch with
+  Keras.
+\newblock   (2020).
+\newblock
+\showURL{%
+\url{https://www.tensorflow.org/tutorials/generative/style_transfer}}
+
+
+\bibitem{polybrush}
+ 2020.
+\newblock Polybrush Introduction and Tutorial.
+\newblock   (2020).
+\newblock
+\showURL{%
+\url{https://unity3d.com/unity/features/worldbuilding/polybrush}}
+
+
+\bibitem{AlvarezMelis2017TheEG}
+{David Alvarez-Melis}. 2017.
+\newblock \showarticletitle{The Emotional GAN : Priming Adversarial Generation
+  of Art with Emotion}.
+\newblock
+
+
+\bibitem{article}
+{Ingar Brinck} {and} {Vasudevi Reddy}. 2019.
+\newblock \showarticletitle{Dialogue in the making: emotional engagement with
+  materials}.
+\newblock {\em Phenomenology and the Cognitive Sciences\/} (07 2019).
+\newblock
+\showDOI{%
+\url{http://dx.doi.org/10.1007/s11097-019-09629-2}}
+
+
+\bibitem{acgan}
+{Jason Brownlee}. 2020.
+\newblock How to Develop an Auxiliary Classifier GAN (AC-GAN) From Scratch with
+  Keras.
+\newblock   (2020).
+\newblock
+\showURL{%
+\url{https://machinelearningmastery.com/how-to-develop-an-auxiliary-classifier-gan-ac-gan/}}
+
+
+\bibitem{Gatys_2016}
+{Leon Gatys}, {Alexander Ecker}, {and} {Matthias Bethge}. 2016.
+\newblock \showarticletitle{A Neural Algorithm of Artistic Style}.
+\newblock {\em Journal of Vision\/} {16}, 12 (Sep 2016), 326.
+\newblock
+\showISSN{1534-7362}
+\showDOI{%
+\url{http://dx.doi.org/10.1167/16.12.326}}
+
+
+\bibitem{goodfellow2014generative}
+{Ian~J. Goodfellow}, {Jean Pouget-Abadie}, {Mehdi Mirza}, {Bing Xu}, {David
+  Warde-Farley}, {Sherjil Ozair}, {Aaron Courville}, {and} {Yoshua Bengio}.
+  2014.
+\newblock Generative Adversarial Networks.
+\newblock   (2014).
+\newblock
+
+
+\bibitem{DBLP:journals/corr/abs-1711-07566}
+{Hiroharu Kato}, {Yoshitaka Ushiku}, {and} {Tatsuya Harada}. 2017.
+\newblock \showarticletitle{Neural 3D Mesh Renderer}.
+\newblock {\em CoRR\/}  {abs/1711.07566} (2017).
+\newblock
+\showURL{%
+\url{http://arxiv.org/abs/1711.07566}}
+
+
+\bibitem{Liu_2017}
+{Jerry Liu}, {Fisher Yu}, {and} {Thomas Funkhouser}. 2017.
+\newblock \showarticletitle{Interactive 3D Modeling with a Generative
+  Adversarial Network}.
+\newblock {\em 2017 International Conference on 3D Vision (3DV)\/} (Oct 2017).
+\newblock
+\showISBNx{9781538626108}
+\showDOI{%
+\url{http://dx.doi.org/10.1109/3dv.2017.00024}}
+
+
+\bibitem{LREC18-ArtEmo}
+{Saif~M. Mohammad} {and} {Svetlana Kiritchenko}. 2018.
+\newblock \showarticletitle{An Annotated Dataset of Emotions Evoked by Art}. In
+  {\em Proceedings of the 11th Edition of the Language Resources and Evaluation
+  Conference (LREC-2018)}. Miyazaki, Japan.
+\newblock
+
+
+\bibitem{10.5555/3305890.3305954}
+{Augustus Odena}, {Christopher Olah}, {and} {Jonathon Shlens}. 2017.
+\newblock \showarticletitle{Conditional Image Synthesis with Auxiliary
+  Classifier GANs}. In {\em Proceedings of the 34th International Conference on
+  Machine Learning - Volume 70} {\em (ICML’17)}. JMLR.org, 2642–2651.
+\newblock
+
+
+\end{thebibliography}
